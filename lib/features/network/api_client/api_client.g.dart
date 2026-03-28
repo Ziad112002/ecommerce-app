@@ -27,7 +27,7 @@ class _ApiClient implements ApiClient {
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
     final _options = _setStreamType<AuthResponse>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             '/api/v1/auth/signin',
@@ -55,7 +55,7 @@ class _ApiClient implements ApiClient {
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
     final _options = _setStreamType<AuthResponse>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             '/api/v1/auth/signup',

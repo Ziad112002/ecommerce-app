@@ -11,9 +11,9 @@ part 'api_client.g.dart';
 abstract class ApiClient {
   @factoryMethod
   factory ApiClient(Dio dio) = _ApiClient;
-  @GET("/api/v1/auth/signin")
+  @POST("/api/v1/auth/signin")
   Future<AuthResponse> login(@Body()LoginRequest request);
-  @GET("/api/v1/auth/signup")
+  @POST("/api/v1/auth/signup")
 
   Future<AuthResponse> register(@Body()RegisterRequest request);
 
