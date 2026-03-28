@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/core/resources/color_manager.dart';
-import 'package:ecommerce_app/core/resources/styles_manager.dart';
+import 'package:ecommerce_app/core/utils/color_manager.dart';
+import 'package:ecommerce_app/core/utils/styles_manager.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';
 import 'package:ecommerce_app/core/widget/heart_button.dart';
 import 'package:flutter/material.dart';

@@ -3,7 +3,7 @@ import 'package:ecommerce_app/features/main_layout/home/presentation/widgets/cus
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/resources/assets_manager.dart';
+import '../../../../core/utils/assets_manager.dart';
 import 'widgets/custom_ads_widget.dart';
 import 'widgets/custom_section_bar.dart';
 

@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/core/resources/assets_manager.dart';
-import 'package:ecommerce_app/core/resources/color_manager.dart';
+import 'package:ecommerce_app/core/utils/assets_manager.dart';
+import 'package:ecommerce_app/core/utils/color_manager.dart';
 import 'package:ecommerce_app/core/widget/home_screen_app_bar.dart';
 import 'package:ecommerce_app/features/main_layout/categories/presentation/categories_tab.dart';
 import 'package:ecommerce_app/features/main_layout/favourite/presentation/favourite_screen.dart';
@@ -32,8 +32,8 @@ class _MainLayoutState extends State<MainLayout> {
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.1,
+        child: SizedOverflowBox(
+          size: Size(double.infinity, MediaQuery.of(context).size.height*.1),
           child: BottomNavigationBar(
             currentIndex: currentIndex,
             onTap: (value) => changeSelectedIndex(value),
@@ -56,7 +56,7 @@ class _MainLayoutState extends State<MainLayout> {
     );
   }
 
-  changeSelectedIndex(int selectedIndex) {
+  void changeSelectedIndex(int selectedIndex) {
     setState(() {
       currentIndex = selectedIndex;
     });

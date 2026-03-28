@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce_app/core/resources/color_manager.dart';
-import 'package:ecommerce_app/core/resources/constants_manager.dart';
-import 'package:ecommerce_app/core/resources/values_manager.dart';
+import 'package:ecommerce_app/core/utils/color_manager.dart';
+import 'package:ecommerce_app/core/utils/constants_manager.dart';
+import 'package:ecommerce_app/core/utils/values_manager.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';
 import 'package:ecommerce_app/core/widget/heart_button.dart';
 import 'package:ecommerce_app/features/main_layout/favourite/presentation/widgets/add_to_cart_button.dart';
