@@ -79,7 +79,7 @@ class _BuildTextFieldState extends State<BuildTextField> {
           margin: const EdgeInsets.only(top: AppMargin.m5),
           decoration: BoxDecoration(
             color: widget.backgroundColor ??
-                ColorManager.darkGrey.withOpacity(.15),
+                ColorManager.darkGrey.withAlpha(38),
             borderRadius: BorderRadius.circular(AppSize.s8),
             border: Border.all(color: widget.borderBackgroundColor ?? ColorManager.transparent )
           ),
@@ -145,7 +145,7 @@ class _BuildTextFieldState extends State<BuildTextField> {
               enabledBorder: InputBorder.none,
               errorStyle: TextStyle(
                 fontSize: AppSize.s0,
-                color: ColorManager.transparent,
+                color: Colors.red,
               ),
             ),
           ),
@@ -159,7 +159,7 @@ class _BuildTextFieldState extends State<BuildTextField> {
                 ),
                 child: Text(
                   errorText!,
-                  style: getMediumStyle(color: ColorManager.white)
+                  style: getMediumStyle(color: Colors.red)
                       .copyWith(fontSize: 18.sp),
                 ),
               ),

@@ -20,4 +20,5 @@ class Resource<T> {
   }
   bool get isSuccess=>status==AppStatus.success;
   bool get isLoading=>status==AppStatus.loading;
+  bool get isError=>status==AppStatus.error;
 }

@@ -26,8 +26,9 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  TextEditingController emailCtrl = TextEditingController();
-  TextEditingController passwordCtrl = TextEditingController();
+  final TextEditingController emailCtrl = TextEditingController();
+  final TextEditingController passwordCtrl = TextEditingController();
+  final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
  final AuthCubit _cubit=getIt();
   @override
   Widget build(BuildContext context) {
@@ -53,128 +54,134 @@ class _SignInScreenState extends State<SignInScreen> {
         }
 
       },
-      child: Scaffold(
-        backgroundColor: ColorManager.primary,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(AppPadding.p20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: AppSize.s40.h,
-                  ),
-                  Center(child: SvgPicture.asset(SvgAssets.routeLogo)),
-                  SizedBox(
-                    height: AppSize.s40.h,
-                  ),
-                  Text(
-                    'Welcome Back To Route',
-                    style: getBoldStyle(color: ColorManager.white)
-                        .copyWith(fontSize: FontSize.s24.sp),
-                  ),
-                  Text(
-                    'Please sign in with your mail',
-                    style: getLightStyle(color: ColorManager.white)
-                        .copyWith(fontSize: FontSize.s16.sp),
-                  ),
-                  SizedBox(
-                    height: AppSize.s50.h,
-                  ),
-                  BuildTextField(
-                    controller: emailCtrl,
-                    backgroundColor: ColorManager.white,
-                    hint: 'enter your name',
-                    label: 'User name',
-                    textInputType: TextInputType.emailAddress,
-                    validation: AppValidators.validateEmail,
-                  ),
-                  SizedBox(
-                    height: AppSize.s28.h,
-                  ),
-                  BuildTextField(
-                    controller: passwordCtrl,
-                    hint: 'enter your password',
-                    backgroundColor: ColorManager.white,
-                    label: 'Password',
-                    validation: AppValidators.validatePassword,
-                    isObscured: true,
-                    textInputType: TextInputType.text,
-                  ),
-                  SizedBox(
-                    height: AppSize.s8.h,
-                  ),
-                  Row(
-                    children: [
-                      const Spacer(),
-                      GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            'Forget password?',
-                            style: getMediumStyle(color: ColorManager.white)
-                                .copyWith(fontSize: FontSize.s18.sp),
-                          )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: AppSize.s60.h,
-                  ),
-                  Center(
-                    child: SizedBox(
-                      // width: MediaQuery.of(context).size.width * .8,
-                      child: BlocBuilder<AuthCubit, AuthState>(
-                        bloc: _cubit,
-                        builder: (context,state) {
-                          final loginState=state.loginApi;
-                          if(!loginState.isLoading){
-                            return CustomElevatedButton(
-                              // borderRadius: AppSize.s8,
-                              isStadiumBorder: false,
-                              label: 'Login',
-                              backgroundColor: ColorManager.white,
-                              textStyle: getBoldStyle(
-                                  color: ColorManager.primary, fontSize: AppSize.s18),
-                              onTap: () {
-                              _cubit.login(emailCtrl.text, passwordCtrl.text);
-                              },
-                            );
-                          }else{
-                            return CircularProgressIndicator(
-                              backgroundColor: ColorManager.white,
-                            );
-                          }
+      child: Form(
+        key: _formKey,
+        child: Scaffold(
+          backgroundColor: ColorManager.primary,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(AppPadding.p20),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: AppSize.s40.h,
+                    ),
+                    Center(child: SvgPicture.asset(SvgAssets.routeLogo)),
+                    SizedBox(
+                      height: AppSize.s40.h,
+                    ),
+                    Text(
+                      'Welcome Back To Route',
+                      style: getBoldStyle(color: ColorManager.white)
+                          .copyWith(fontSize: FontSize.s24.sp),
+                    ),
+                    Text(
+                      'Please sign in with your mail',
+                      style: getLightStyle(color: ColorManager.white)
+                          .copyWith(fontSize: FontSize.s16.sp),
+                    ),
+                    SizedBox(
+                      height: AppSize.s50.h,
+                    ),
+                    BuildTextField(
+                      controller: emailCtrl,
+                      backgroundColor: ColorManager.white,
+                      hint: 'enter your name',
+                      label: 'User name',
+                      textInputType: TextInputType.emailAddress,
+                      validation: AppValidators.validateEmail,
+                    ),
+                    SizedBox(
+                      height: AppSize.s28.h,
+                    ),
+                    BuildTextField(
+                      controller: passwordCtrl,
+                      hint: 'enter your password',
+                      backgroundColor: ColorManager.white,
+                      label: 'Password',
+                      validation: AppValidators.validatePassword,
+                      isObscured: true,
+                      textInputType: TextInputType.text,
+                    ),
+                    SizedBox(
+                      height: AppSize.s8.h,
+                    ),
+                    Row(
+                      children: [
+                        const Spacer(),
+                        GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              'Forget password?',
+                              style: getMediumStyle(color: ColorManager.white)
+                                  .copyWith(fontSize: FontSize.s18.sp),
+                            )),
+                      ],
+                    ),
+                    SizedBox(
+                      height: AppSize.s60.h,
+                    ),
+                    Center(
+                      child: SizedBox(
+                        // width: MediaQuery.of(context).size.width * .8,
+                        child: BlocBuilder<AuthCubit, AuthState>(
+                          bloc: _cubit,
+                          builder: (context,state) {
+                            final loginState=state.loginApi;
+                            if(!loginState.isLoading){
+                              return CustomElevatedButton(
+                                // borderRadius: AppSize.s8,
+                                isStadiumBorder: false,
+                                label: 'Login',
+                                backgroundColor: ColorManager.white,
+                                textStyle: getBoldStyle(
+                                    color: ColorManager.primary, fontSize: AppSize.s18),
+                                onTap: () {
+                                  if(!_formKey.currentState!.validate()){
+                                    return ;
+                                  }
+                                _cubit.login(emailCtrl.text, passwordCtrl.text);
+                                },
+                              );
+                            }else{
+                              return CircularProgressIndicator(
+                                backgroundColor: ColorManager.white,
+                              );
+                            }
 
-                        }
+                          }
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don’t have an account?',
-                        style: getSemiBoldStyle(color: ColorManager.white)
-                            .copyWith(fontSize: FontSize.s16.sp),
-                      ),
-                      SizedBox(
-                        width: AppSize.s8.w,
-                      ),
-                      GestureDetector(
-                        onTap: () =>
-                            Navigator.pushNamed(context, Routes.signUpRoute),
-                        child: Text(
-                          'Create Account',
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Don’t have an account?',
                           style: getSemiBoldStyle(color: ColorManager.white)
                               .copyWith(fontSize: FontSize.s16.sp),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                        SizedBox(
+                          width: AppSize.s8.w,
+                        ),
+                        GestureDetector(
+                          onTap: () =>
+                              Navigator.pushNamed(context, Routes.signUpRoute),
+                          child: Text(
+                            'Create Account',
+                            style: getSemiBoldStyle(color: ColorManager.white)
+                                .copyWith(fontSize: FontSize.s16.sp),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
