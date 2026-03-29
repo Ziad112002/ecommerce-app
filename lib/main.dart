@@ -26,7 +26,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: child,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: isLoggedIn?Routes.mainRoute:Routes.signInRoute,
+        initialRoute: isLoggedIn?Routes.mainRoute:Routes.signInRoute,// this for auto login
       ),
     );
   }
