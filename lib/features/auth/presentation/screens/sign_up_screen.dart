@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../../../../core/di/di.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -32,11 +31,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
   @override
   void dispose() {
-    super.dispose();
     _nameCtrl.dispose();
     _phoneCtrl.dispose();
     _emailCtrl.dispose();
     _passwordCtrl.dispose();
+    _rePasswordCtrl.dispose();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -128,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       hint: 're-enter your password',
                       backgroundColor: ColorManager.white,
                       label: ' confirm password',
-                      validation: AppValidators.validatePassword,
+                      validation: _confirmPasswordValidate,
                       isObscured: true,
                       textInputType: TextInputType.text,
                     ),
@@ -177,4 +177,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+  String? _confirmPasswordValidate(String? val) {
+                      if (val == null || val.isEmpty) {
+                        return 'this field is required';
+                      } else if (val != _passwordCtrl.text) {
+                        return 'same password';
+                      } else {
+                        return null;
+                      }
+                    }
 }

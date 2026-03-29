@@ -26,10 +26,16 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final TextEditingController emailCtrl = TextEditingController();
-  final TextEditingController passwordCtrl = TextEditingController();
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _passwordCtrl = TextEditingController();
   final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
  final AuthCubit _cubit=getIt();
+ @override
+  void dispose() {
+   _emailCtrl.dispose();
+   _passwordCtrl.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit,AuthState>(
@@ -86,7 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       height: AppSize.s50.h,
                     ),
                     BuildTextField(
-                      controller: emailCtrl,
+                      controller: _emailCtrl,
                       backgroundColor: ColorManager.white,
                       hint: 'enter your name',
                       label: 'User name',
@@ -97,7 +103,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       height: AppSize.s28.h,
                     ),
                     BuildTextField(
-                      controller: passwordCtrl,
+                      controller: _passwordCtrl,
                       hint: 'enter your password',
                       backgroundColor: ColorManager.white,
                       label: 'Password',
@@ -142,7 +148,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   if(!_formKey.currentState!.validate()){
                                     return ;
                                   }
-                                _cubit.login(emailCtrl.text, passwordCtrl.text);
+                                _cubit.login(_emailCtrl.text, _passwordCtrl.text);
                                 },
                               );
                             }else{

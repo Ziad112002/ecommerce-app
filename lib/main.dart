@@ -1,16 +1,20 @@
 import 'package:ecommerce_app/core/di/di.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';
+import 'package:ecommerce_app/core/utils/shared_prefs_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/routes_manager/route_generator.dart';
 
-void main() {
+void main() async{
   initDependencies();
-  runApp(const MainApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  bool isLoggedIn=(await getIt<SharedPrefsUtils>().getToken())?.isNotEmpty??false;
+  runApp( MainApp(isLoggedIn: isLoggedIn,));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final bool isLoggedIn;
+   const MainApp({super.key,required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: child,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.signInRoute,
+        initialRoute: isLoggedIn?Routes.mainRoute:Routes.signInRoute,
       ),
     );
   }
