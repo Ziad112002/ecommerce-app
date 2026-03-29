@@ -25,6 +25,7 @@ import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
 import '../../features/auth/presentation/screens/cubit/auth_cubit.dart'
     as _i219;
 import '../../features/network/api_client/api_client.dart' as _i652;
+import '../utils/error_handler.dart' as _i383;
 import '../utils/shared_prefs_utils.dart' as _i652;
 import 'get_it_module.dart' as _i1015;
 
@@ -40,6 +41,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final getItModule = _$GetItModule();
+    gh.factory<_i383.ErrorHandler>(() => _i383.ErrorHandler());
     gh.factory<_i652.SharedPrefsUtils>(() => _i652.SharedPrefsUtils());
     gh.singleton<_i895.Connectivity>(() => getItModule.getConnectivity());
     gh.singleton<_i361.Dio>(() => getItModule.getDio());
@@ -48,6 +50,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1068.AuthRemoteDataSourceImpl(
               gh<_i652.ApiClient>(),
               gh<_i652.SharedPrefsUtils>(),
+              gh<_i383.ErrorHandler>(),
             ));
     gh.factory<_i976.AuthRepo>(() => _i751.AuthRepoImpl(
           gh<_i895.Connectivity>(),
