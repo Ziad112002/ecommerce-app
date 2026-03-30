@@ -3,7 +3,7 @@ import 'package:ecommerce_app/core/utils/color_manager.dart';
 import 'package:ecommerce_app/core/utils/font_manager.dart';
 import 'package:ecommerce_app/core/utils/styles_manager.dart';
 import 'package:ecommerce_app/core/utils/values_manager.dart';
-import 'package:ecommerce_app/features/main_layout/categories/presentation/widgets/category_card_item.dart';
+import 'package:ecommerce_app/features/main_layout/presentation/screens/tabs/categories/widgets/category_card_item.dart';
 import 'package:flutter/material.dart';
 
 import 'sub_category_item.dart';

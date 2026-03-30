@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/core/utils/values_manager.dart';
-import 'package:ecommerce_app/features/main_layout/categories/presentation/widgets/categories_list.dart';
+import 'package:ecommerce_app/features/main_layout/presentation/screens/tabs/categories/widgets/categories_list.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/sub_categories_list.dart';

@@ -1,12 +1,12 @@
 import 'package:ecommerce_app/core/utils/assets_manager.dart';
 import 'package:ecommerce_app/core/utils/color_manager.dart';
 import 'package:ecommerce_app/core/widget/home_screen_app_bar.dart';
-import 'package:ecommerce_app/features/main_layout/categories/presentation/categories_tab.dart';
-import 'package:ecommerce_app/features/main_layout/favourite/presentation/favourite_screen.dart';
-import 'package:ecommerce_app/features/main_layout/profile_tab/presentation/profile_tab.dart';
+import 'package:ecommerce_app/features/main_layout/presentation/screens/tabs/categories/categories_tab.dart';
+import 'package:ecommerce_app/features/main_layout/presentation/screens/tabs/favourite/favourite_screen.dart';
+import 'package:ecommerce_app/features/main_layout/presentation/screens/tabs/profile/profile_tab.dart';
 import 'package:flutter/material.dart';
 
-import 'home/presentation/home_tab.dart';
+import 'home/home_tab.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
