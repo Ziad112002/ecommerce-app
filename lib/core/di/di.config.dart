@@ -24,6 +24,21 @@ import '../../features/auth/domain/use_cases/login_use_case.dart' as _i1038;
 import '../../features/auth/domain/use_cases/register_use_case.dart' as _i1010;
 import '../../features/auth/presentation/screens/cubit/auth_cubit.dart'
     as _i219;
+import '../../features/main_layout/data/repositories/home/data_sources/remote_data_source.dart'
+    as _i686;
+import '../../features/main_layout/data/repositories/home/data_sources/remote_data_source_impl.dart'
+    as _i455;
+import '../../features/main_layout/data/repositories/home/home_repo_impl.dart'
+    as _i599;
+import '../../features/main_layout/domain/repositories/home_repo.dart' as _i515;
+import '../../features/main_layout/domain/use_cases/categories_use_case.dart'
+    as _i332;
+import '../../features/main_layout/domain/use_cases/products_use_case.dart'
+    as _i131;
+import '../../features/main_layout/domain/use_cases/sub_categories_use_case.dart'
+    as _i373;
+import '../../features/main_layout/presentation/screens/tabs/home/cubit/home_cubit.dart'
+    as _i257;
 import '../../features/network/api_client/api_client.dart' as _i652;
 import '../utils/error_handler.dart' as _i383;
 import '../utils/shared_prefs_utils.dart' as _i652;
@@ -46,6 +61,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i895.Connectivity>(() => getItModule.getConnectivity());
     gh.singleton<_i361.Dio>(() => getItModule.getDio());
     gh.singleton<_i652.ApiClient>(() => _i652.ApiClient(gh<_i361.Dio>()));
+    gh.factory<_i686.RemoteDataSource>(
+        () => _i455.RemoteDataSourceImpl(gh<_i652.ApiClient>()));
+    gh.factory<_i515.HomeRepo>(() => _i599.HomeRepoImpl(
+          gh<_i686.RemoteDataSource>(),
+          gh<_i895.Connectivity>(),
+        ));
     gh.factory<_i408.AuthRemoteDataSource>(
         () => _i1068.AuthRemoteDataSourceImpl(
               gh<_i652.ApiClient>(),
@@ -56,10 +77,20 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i895.Connectivity>(),
           gh<_i408.AuthRemoteDataSource>(),
         ));
+    gh.factory<_i332.CategoriesUseCase>(
+        () => _i332.CategoriesUseCase(gh<_i515.HomeRepo>()));
+    gh.factory<_i131.ProductsUseCase>(
+        () => _i131.ProductsUseCase(gh<_i515.HomeRepo>()));
+    gh.factory<_i373.SubCategoriesUseCase>(
+        () => _i373.SubCategoriesUseCase(gh<_i515.HomeRepo>()));
     gh.factory<_i1038.LoginUseCase>(
         () => _i1038.LoginUseCase(gh<_i976.AuthRepo>()));
     gh.factory<_i1010.RegisterUseCase>(
         () => _i1010.RegisterUseCase(gh<_i976.AuthRepo>()));
+    gh.factory<_i257.HomeCubit>(() => _i257.HomeCubit(
+          gh<_i332.CategoriesUseCase>(),
+          gh<_i131.ProductsUseCase>(),
+        ));
     gh.factory<_i219.AuthCubit>(() => _i219.AuthCubit(
           gh<_i1038.LoginUseCase>(),
           gh<_i1010.RegisterUseCase>(),
