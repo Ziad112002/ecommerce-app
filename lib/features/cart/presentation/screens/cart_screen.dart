@@ -60,7 +60,7 @@ class CartScreen extends StatelessWidget {
                     itemBuilder: (context, index) => CartItemWidget(
                       cartProduct: products[index],
                       onDeleteTap: () {
-                        cartCubit.deleteFromCart(products[index].id!);
+                        cartCubit.deleteFromCart(products[index].product!.id!);
                       },
                       onDecrementTap: (value) {
                         cartCubit.updateCartProductQuantity(products[index].product!.id!,(products[index].count!-1).toInt());
