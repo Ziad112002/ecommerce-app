@@ -3,14 +3,15 @@ import 'package:ecommerce_app/core/utils/color_manager.dart';
 import 'package:ecommerce_app/core/utils/font_manager.dart';
 import 'package:ecommerce_app/core/utils/styles_manager.dart';
 import 'package:ecommerce_app/core/utils/values_manager.dart';
+import 'package:ecommerce_app/features/main_layout/domain/models/category.dart';
 import 'package:ecommerce_app/features/main_layout/presentation/screens/tabs/categories/widgets/category_card_item.dart';
 import 'package:flutter/material.dart';
-
 import 'sub_category_item.dart';
 
 class SubCategoriesList extends StatelessWidget {
-  const SubCategoriesList({super.key});
-
+  const SubCategoriesList({super.key,required this.categoryTitle,required this.subCategories});
+final String categoryTitle;
+final List<Category> subCategories;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -20,24 +21,24 @@ class SubCategoriesList extends StatelessWidget {
           // category title
           SliverToBoxAdapter(
             child: Text(
-              'Laptops & Electronics',
+              categoryTitle,
               style: getBoldStyle(
                   color: ColorManager.primary, fontSize: FontSize.s14),
             ),
           ),
           // the category card
           SliverToBoxAdapter(
-            child: CategoryCardItem("Laptops & Electronics",
+            child: CategoryCardItem(categoryTitle,
                 ImageAssets.categoryCardImage, goToCategoryProductsListScreen),
           ),
           // the grid view of the subcategories
           SliverGrid(
               delegate: SliverChildBuilderDelegate(
-                childCount: 26,
+                childCount: subCategories.length,
                 (context, index) => SubCategoryItem(
-                    'Watches',
+                    subCategories[index].name??"",
                     ImageAssets.subcategoryCardImage,
-                    goToCategoryProductsListScreen),
+                ),
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -50,7 +51,7 @@ class SubCategoriesList extends StatelessWidget {
     );
   }
 
-  goToCategoryProductsListScreen() {
+  void goToCategoryProductsListScreen() {
     // todo implement this function
   }
 }

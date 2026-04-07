@@ -7,11 +7,9 @@ import 'package:ecommerce_app/features/main_layout/presentation/screens/tabs/hom
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/widget/product_card.dart';
 import 'widgets/custom_ads_widget.dart';
-import 'widgets/custom_brand_widget.dart';
 import 'widgets/custom_section_bar.dart';
 
 class HomeTab extends StatefulWidget {

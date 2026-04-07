@@ -8,12 +8,12 @@ import 'package:ecommerce_app/features/main_layout/domain/models/category.dart';
 import 'package:ecommerce_app/features/main_layout/domain/models/product.dart';
 import 'package:ecommerce_app/features/main_layout/domain/repositories/home_repo.dart';
 import 'package:injectable/injectable.dart';
-import 'data_sources/remote_data_source.dart';
+import 'data_sources/home_remote_data_source.dart';
 
 @Injectable(as: HomeRepo)
 class HomeRepoImpl extends HomeRepo {
   final Connectivity _connectivity;
-  final RemoteDataSource _remoteDataSource;
+  final HomeRemoteDataSource _remoteDataSource;
   HomeRepoImpl(this._remoteDataSource, this._connectivity);
   @override
   Future<ApiResult<List<Category>>> getCategories() async {
