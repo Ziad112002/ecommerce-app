@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TotalPriceAndCheckoutBotton extends StatelessWidget {
   const TotalPriceAndCheckoutBotton(
       {super.key, required this.totalPrice, required this.checkoutButtonOnTap});
-  final int totalPrice;
+  final double totalPrice;
   final void Function() checkoutButtonOnTap;
   @override
   Widget build(BuildContext context) {
@@ -23,21 +23,18 @@ class TotalPriceAndCheckoutBotton extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: getMediumStyle(
-                color: ColorManager.textColor.withOpacity(0.6),
+                color: ColorManager.textColor.withAlpha(153),
                 fontSize: AppSize.s18.sp,
               ),
             ),
             SizedBox(height: 4.h),
-            SizedBox(
-              width: 90.w,
-              child: Text(
-                'EGP $totalPrice',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: getMediumStyle(
-                  color: ColorManager.textColor,
-                  fontSize: AppSize.s18.sp,
-                ),
+            Text(
+              'EGP $totalPrice',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: getMediumStyle(
+                color: ColorManager.textColor,
+                fontSize: AppSize.s18.sp,
               ),
             ),
           ],

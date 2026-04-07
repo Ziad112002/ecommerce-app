@@ -1,3 +1,6 @@
+import 'package:ecommerce_app/features/cart/domain/models/cart_product.dart';
+import 'package:ecommerce_app/features/main_layout/data/mappers/product_mapper.dart';
+
 import '../../../network/models/response/product/remote_product.dart';
 
 class RemoteCartProducts {
@@ -30,5 +33,8 @@ class RemoteCartProducts {
     }
     map['price'] = price;
     return map;
+  }
+  CartProduct toCartProduct() {
+    return CartProduct(count, id, product?.toProduct(), price);
   }
 }

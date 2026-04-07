@@ -90,7 +90,7 @@ class _HomeTabState extends State<HomeTab> {
               ),
               SizedBox(height: 12.h),
               CustomSectionBar(
-                sectionNname: 'Home Appliance',
+                sectionNname: 'Products',
                 function: () {},
               ),
               SizedBox(

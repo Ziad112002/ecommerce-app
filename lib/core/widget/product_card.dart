@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/core/di/di.dart';
 import 'package:ecommerce_app/core/utils/color_manager.dart';
 import 'package:ecommerce_app/core/utils/styles_manager.dart';
+import 'package:ecommerce_app/features/cart/presentation/screens/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/features/cart/presentation/screens/cubit/cart_state.dart';
 import 'package:ecommerce_app/features/main_layout/domain/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductCard extends StatelessWidget {
@@ -21,7 +25,6 @@ class ProductCard extends StatelessWidget {
       return "${words.sublist(0, 4).join(' ')}..";
     }
   }
-
   @override
   Widget build(BuildContext context) {
 
@@ -62,57 +65,6 @@ class ProductCard extends StatelessWidget {
               ),
             ),
 
-            // Expanded(
-            //   flex: 1,
-            //   child: Stack(
-            //     alignment: AlignmentDirectional.center,
-            //     children: [
-            //       SizedBox(
-            //         height: height,
-            //         child: ClipRRect(
-            //           borderRadius: BorderRadius.only(
-            //             topLeft: Radius.circular(24.r),
-            //             topRight: Radius.circular(24.r),
-            //           ),
-            //           child: AspectRatio(
-            //             aspectRatio: 16 / 9,
-            //             child: Image.asset(
-            //               image,
-            //               fit: BoxFit.cover,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //       Positioned(
-            //         top: height * 0.01,
-            //         right: width * 0.02,
-            //         child: Container(
-            //           height: height * 0.036,
-            //           width: width * 0.08,
-            //           decoration: BoxDecoration(
-            //             color: Colors.white,
-            //             shape: BoxShape.circle,
-            //             boxShadow: [
-            //               BoxShadow(
-            //                 color: Colors.black.withAlpha(51),
-            //                 spreadRadius: 2,
-            //                 blurRadius: 4,
-            //                 offset: const Offset(0, 2),
-            //               ),
-            //             ],
-            //           ),
-            //           child: InkWell(
-            //             onTap: () {},
-            //             child: Image.asset(
-            //               IconsAssets.icWithList,
-            //               color: ColorManager.primary,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             Expanded(
               flex: 1,
               child: Padding(
@@ -180,14 +132,7 @@ class ProductCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        InkWell(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.add_circle_rounded,
-                            color: ColorManager.primary,
-                            size: 36,
-                          ),
-                        ),
+                        productActionButton(),
                       ],
                     ),
                   ],
@@ -197,6 +142,25 @@ class ProductCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget productActionButton() {
+    CartCubit cart =getIt();
+    return BlocBuilder<CartCubit,CartState>(
+      builder: (context,state) {
+        return InkWell(
+                            onTap: () {
+                              cart.isProductInCart(product.id!)?
+                              cart.deleteFromCart(product.id!):cart.addToCart(product.id!);
+                            },
+                            child: Icon(
+                             cart.isProductInCart(product.id!)? Icons.remove_circle_rounded:Icons.add_circle_rounded,
+                              color: ColorManager.primary,
+                              size: 36,
+                            ),
+                          );
+      }
     );
   }
 }

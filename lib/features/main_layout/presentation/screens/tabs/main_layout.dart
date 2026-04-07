@@ -8,6 +8,7 @@ import 'package:ecommerce_app/features/main_layout/presentation/screens/tabs/hom
 import 'package:ecommerce_app/features/main_layout/presentation/screens/tabs/profile/profile_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../cart/presentation/screens/cubit/cart_cubit.dart';
 import 'home/home_tab.dart';
 
 class MainLayout extends StatefulWidget {
@@ -31,6 +32,8 @@ class _MainLayoutState extends State<MainLayout> {
 super.initState();
 cubit.getCategories();
 cubit.getProducts();
+CartCubit cartCubit=getIt();
+cartCubit.getCart();
   }
   @override
   Widget build(BuildContext context) {
